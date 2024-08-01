@@ -4,7 +4,7 @@ This project consists of Python scripts to scrape data from the [Transfermarkt w
 
 First, we obtain the data from the website using web scraping techniques. This involves using the following functions:
 
-## Web scraping functions
+## Web Scraping Functions
 
 
 
@@ -212,4 +212,62 @@ By default, it collects data for all seasons between 23/24 and 05/06, but you ca
 
     driver.quit()
     return df_seasons_statistics
+```
+
+## Data cleaning code
+
+This part of the project was to clean the datasets to ensure smooth data analysis and to merge two datasets into a single table.
+
+### Cleaning Data - Teams
+To begin with, we needed to clean the `Teams` column in the `df_seasons_statistics_table` DataFrame by removing unwanted characters and whitespace. 
+
+```python
+df_seasons_statistics_table['Teams'] = (
+    df_seasons_statistics_table['Teams'].str.replace('\n', '', regex=False)  
+    .str.replace('\xa0', '', regex=False)  
+    .str.strip()
+```
+
+
+### Standardizing Team Names
+To merge the datasets, it was necessary to standardize the team names between them. This involved creating unique lists of team names from both datasets and sorting them alphabetically.
+
+```python
+# Create unique lists of team names
+unique_teams_table = df_seasons_statistics_table['Teams'].unique()
+unique_teams_transfers = df_seasons_statistics_transfers['Teams'].unique()
+
+# Sort the team names alphabetically
+unique_teams_table.sort()
+unique_teams_transfers.sort()
+```
+Next, we mapped the team names from the transfers dataset to match the names in the table dataset using a mapping dictionary.
+
+```python
+# Create a mapping dictionary for team names
+mapping_dict = dict(zip(unique_teams_transfers, unique_teams_table))
+mapping_dict
+```
+
+Finally, we used the mapping dictionary to update the team names in the `df_seasons_statistics_transfers` DataFrame, ensuring consistency across both datasets.
+
+```python
+df_seasons_statistics_transfers['Teams'] = df_seasons_statistics_transfers['Teams'].map(mapping_dict).fillna(df_seasons_statistics_transfers['Teams'])
+df_seasons_statistics_transfers
+```
+
+### Cleaning Data - Balance, Spend
+After merging the datasets, we used the `convert_currency` function to clean and convert the currency values in the `Spend` and `Balance` columns. This function handles different formats, including values in millions (`m`) and thousands (`k`).
+
+```python
+def convert_currency(value):
+    value = value.replace('€', '')
+    if value == '-':
+        return 0.0
+    elif 'm' in value:
+        return float(value.replace('m', '')) * 1e6
+    elif 'k' in value:
+        return float(value.replace('k', '')) * 1e3
+    else:
+        return float(value)
 ```
