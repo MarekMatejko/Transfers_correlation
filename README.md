@@ -271,3 +271,43 @@ def convert_currency(value):
     else:
         return float(value)
 ```
+
+### Cleaning Data - Conclusion 
+
+Below is an example of how the data looked before cleaning:
+![Tables without cleaning](Images/Tables_without_clening.png)
+
+After cleaning and merging, our table looks like this:
+
+![After merged and cleaning data](Images/Merged_table.png)
+
+## Finding Correlation 
+
+Using Python and the Pearson correlation coefficient, we can analyze the relationship between team spending and their league positions.
+
+### Correlation - Pearson Correlation
+
+The Pearson correlation coefficient, often denoted as `r`, is a measure of the linear relationship between two variables. It quantifies both the strength and direction of this relationship.
+
+The Pearson correlation coefficient (`r`) is calculated using the following formula:
+
+$$
+r = \frac{n(\sum xy) - (\sum x)(\sum y)}{\sqrt{[n \sum x^2 - (\sum x)^2][n \sum y^2 - (\sum y)^2]}}
+$$
+
+where:
+- **n**: Number of data points.
+- **$\sum xy$**: Sum of the product of paired scores.
+- **$\sum x$**: Sum of x scores.
+- **$\sum y$**: Sum of y scores.
+- **$\sum x^2$**: Sum of the squares of x scores.
+- **$\sum y^2$**: Sum of the squares of y scores.
+
+### Correlation - Spending rank in year 
+
+In our analysis, `x` represents team positions in the league, and `y` represents the spending rank of teams by year.
+
+First, we add the spending rank column using Python on our merged dataset. This allows us to calculate and analyze the correlation between spending ranks and league positions for each year.
+
+
+
