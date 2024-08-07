@@ -303,11 +303,37 @@ where:
 - **$\sum x^2$**: Sum of the squares of x scores.
 - **$\sum y^2$**: Sum of the squares of y scores.
 
-### Correlation - Spending rank in year 
+### Correlation - Spending Rank in Year
 
 In our analysis, `x` represents team positions in the league, and `y` represents the spending rank of teams by year.
 
 First, we add the spending rank column using Python on our merged dataset. This allows us to calculate and analyze the correlation between spending ranks and league positions for each year.
 
 
+To achieve this, we group the data by `Year` and then, using a lambda function, sort each group by the `Spend` value in descending order. After resetting the index, we assign a `Spend_Rank` based on the sorted index.
+```python
+def assign_ranking(df):
+    df = df.groupby('Year').apply(lambda x: x.sort_values(by='Spend', ascending=False)
+                                          .reset_index(drop=True)
+                                          .assign(Spend_Rank=lambda x: x.index + 1))
+    return df.reset_index(drop=True)
 
+```
+
+### Correlation - Corelation Function 
+
+With `Spend_Rank` now added, we can calculate the correlation between team positions and their spending ranks.
+
+To achieve this, we use a lambda function within a groupby operation to calculate the Pearson correlation coefficient for each year:
+
+```python
+def calculate_correlation_with_lambda(df):
+    correlations = df.groupby('Year').apply(
+        lambda x: x[['Places', 'Spend_Rank']].astype(float)
+        .corr().loc['Places', 'Spend_Rank']
+    ).reset_index(name='Correlation')
+    return correlations
+
+```
+
+After this, we can observe the correlation values for teams in every year.
