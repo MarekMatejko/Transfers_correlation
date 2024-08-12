@@ -460,3 +460,29 @@ def calculate_correlation_with_lambda(df):
 ```
 
 After this, we can observe the correlation values for teams in every year.
+
+
+## Python automatization
+
+
+The initial code was specifically written for the Premier League and demonstrated within a Jupyter Notebook to showcase how the data is processed and transformed within a DataFrame. To extend this functionality to other leagues, we have provided the Transfer_correlation_code folder, which includes Python scripts that can be adapted for different leagues by modifying certain parts of the code. 
+
+
+### Adapting the Code for Different Leagues
+The original project was tested using data sourced from the [Transfermarkt website](https://www.transfermarkt.co.uk/) Specifically, the data was pulled from the following pages: 
+-  https://www.transfermarkt.co.uk/premier-league/einnahmenausgaben/wettbewerb/GB1 
+-  https://www.transfermarkt.co.uk/premier-league/tabelle/wettbewerb/GB1?saison_id=2024.
+
+  To adapt this code for a different league, you need to update the `url_transfers` and `url_league_table variables` within the main function. Here is an example of how you might adjust these URLs for another league, such as La Liga:
+
+```python
+url_transfers = "https://www.transfermarkt.co.uk/premier-league/einnahmenausgaben/wettbewerb/ES1"
+
+url_league_table = "https://www.transfermarkt.co.uk/premier-league/tabelle/wettbewerb/ES1?saison_id=2024"
+```
+
+### Adjusting the Season Range
+In the `main_getting_scraping_data` function, you can also modify the `start_season` and `end_season` parameters to reflect a different range of seasons. It's important to ensure that the `start_season` value corresponds to the correct season in the URL. For example, if you set the `start_season` to 24, the URL should reflect the 2024/25 season.
+
+
+
