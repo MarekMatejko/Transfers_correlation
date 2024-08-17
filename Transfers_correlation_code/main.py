@@ -21,13 +21,19 @@ df_merged_data = Cleaning_data_code.process_dataframes(df_seasons_statistics_tab
 # Assign rankings based on the merged data
 df_merged_data = Finding_correlation_code.assign_ranking(df_merged_data)
 
-# Calculate the correlation between places and spend rank
-correlations = Finding_correlation_code.calculate_correlation_with_lambda(df_merged_data)
+# Calculate correlations between 'Places' and other columns
+correlation_spend_rank = Finding_correlation_code.calculate_correlation(df_merged_data, 'Places', 'Spend_Rank')
+correlation_spend = Finding_correlation_code.calculate_correlation(df_merged_data, 'Places', 'Spend')
+correlation_balance = Finding_correlation_code.calculate_correlation(df_merged_data, 'Places', 'Balance')
+
+# Use combine_correlations fuction
+combined_correlations = Finding_correlation_code.combine_correlations(correlation_spend_rank, correlation_spend, correlation_balance)
+combined_correlations
 
 #  Saving data as csv
 df_merged_data.to_csv('df_merged_data_LaLiga.csv', index=False)
 
-correlations.to_csv('correlations_LaLiga.csv', index=False)
+combined_correlations.to_csv('correlations_LaLiga.csv', index=False)
 
 # Write correlation results
-print(correlations)
+print(combined_correlations)
