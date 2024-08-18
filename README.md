@@ -496,5 +496,52 @@ url_league_table = "https://www.transfermarkt.co.uk/premier-league/tabelle/wettb
 ### Adjusting the Season Range
 In the `main_getting_scraping_data` function, you can also modify the `start_season` and `end_season` parameters to reflect a different range of seasons. It's important to ensure that the `start_season` value corresponds to the correct season in the URL. For example, if you set the `start_season` to 24, the URL should reflect the 2024/25 season.
 
+## Power Bi Report 
+
+Our report considers three types of correlations: one between spending rank, another with actual spending, and the third with balance. 
+
+The first league analyzed in our report is the Premier League.
+
+ ### Premier Leguage 
+
+![Tables without cleaning](Images/Premier_League_Report.png)
+
+In our report, we observe that the correlation between spending and spending rank is very similar. The initial intention behind calculating the spending rank correlation was to highlight that the top-spending teams spend significantly more money than others. However, as we see, the difference isn’t substantial, and the correlation with spending alone can be a good indicator.
+
+We can consider correlation on the following scale:
 
 
+- 0.00 to 0.10: No or negligible correlation
+- 0.10 to 0.30: Weak correlation
+- 0.30 to 0.50: Moderate correlation
+- 0.50 to 0.70: Strong correlation
+- 0.70 to 0.90: Very strong correlation
+- 0.90 to 1.00: Extremely strong or near-perfect correlation
+
+
+In our report, the average spending correlation is 0.49, indicating a moderate, almost strong correlation. This suggests that spending money on transfers can indeed improve a team’s position in the league.
+
+However, if we look at the average balance correlation, it shows a weak correlation of 0.25, meaning that predicting a team’s league position based on balance is not a reliable measure.
+
+Lastly, we notice a very weak correlation in the year 2016.
+
+![Tables without cleaning](Images/Report_2016.png)
+
+The 2016 data shows that this weak correlation is mainly due to Leicester and Arsenal, the top two teams, spending significantly less compared to other teams in that year, making 2016 an outlier.
+
+### La Liga
+
+![Tables without cleaning](Images/La_Liga_Report.png)
+
+Looking at the La Liga report, we can confirm our previous conclusions. Balance is not a good predictor of a team’s position, but spending is. With an average spending correlation of 0.54, we can classify this as a strong correlation.
+
+
+
+## Conclusion 
+
+
+This project analyzed the correlation between spending on transfers and team performance across two major football leagues: the Premier League and La Liga.
+
+Our analysis reveals that financial balance does not significantly impact a team's position in the league. In contrast, the correlation between spending on transfers and team performance is more telling. With spending correlations of 0.49 in the Premier League and 0.54 in La Liga, we observe a moderate to strong relationship, indicating that teams investing more in transfers tend to achieve better results.
+
+Which leads us to conclude that money plays a significant role in modern football.
