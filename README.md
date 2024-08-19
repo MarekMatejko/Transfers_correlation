@@ -1,12 +1,14 @@
 # Finding correlation, between spending money on transfers and team place in league using web scraping.
 
-This project consists of Python scripts to scrape data from the [Transfermarkt website](https://www.transfermarkt.co.uk/). It gathers season statistics and transfer data for the Premier League using Selenium and BeautifulSoup. The data is stored in pandas DataFrames for further analysis.
+This project consists of Python scripts to scrape data from the [Transfermarkt website](https://www.transfermarkt.co.uk/). It gathers season statistics and transfer data for the Premier League using Selenium and BeautifulSoup. 
 
-First, we obtain the data from the website using web scraping techniques. This involves using the following functions:
+Next, we utilize Python and pandas for data cleaning and correlation calculations. Finally, Power BI is employed to create reports that provide insights into these correlations for both the Premier League and La Liga.
+
+
 
 ## Web Scraping Functions
 
-
+First, we obtain the data from the website using web scraping techniques. This involves using the following functions:
 
 ### initialize_driver
 
